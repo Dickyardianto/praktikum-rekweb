@@ -2,12 +2,17 @@
 
 class Peoples extends CI_Controller
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Peoples_model', 'peoples');
+        $this->load->library('form_validation');
+    }
+
     public function index()
     {
         $data['judul'] = 'List Of Peoples';
-
-        $this->load->model('Peoples_model', 'peoples');
-
         $this->load->library('pagination');
 
         if ($this->input->post('submit')) {
@@ -32,5 +37,21 @@ class Peoples extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('peoples/index', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function detailPeoples($id)
+    {
+        $data['judul'] = 'Detail Data Peoples';
+        $data['peoples'] = $this->peoples->getPeoplesById($id);
+        $this->load->view('templates/header', $data);
+        $this->load->view('peoples/detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function hapus($id)
+    {
+        $this->peoples->hapusDataPeoples($id);
+        $this->session->set_flashdata('flash', 'Dihapus');
+        redirect('peoples');
     }
 }

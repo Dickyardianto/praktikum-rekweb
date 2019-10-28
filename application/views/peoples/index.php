@@ -18,6 +18,18 @@
     <div class="row">
         <div class="col-md">
             <h5>Result : <?= $total_rows ?></h5>
+            <?php if ($this->session->flashdata('flash')) : ?>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">Data Peoples
+                        <strong>berhasil</strong> <?= $this->session->flashdata('flash'); ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -41,9 +53,11 @@
                         <td><?= $people['name'] ?></td>
                         <td><?= $people['email'] ?></td>
                         <td>
-                            <a href="" class="badge badge-warning">Detail</a>
+                            <a href="<?= base_url(); ?>peoples/detailPeoples/<?= $people['id']; ?>"
+                                class="badge badge-warning">Detail</a>
                             <a href="" class="badge badge-succes">edit</a>
-                            <a href="" class="badge badge-danger">Hapus</a>
+                            <a href="<?= base_url(); ?>peoples/hapus/<?= $people['id']; ?>" class="badge badge-danger"
+                                onclick="return confirm('Apakah Yakin ?')">Hapus</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
