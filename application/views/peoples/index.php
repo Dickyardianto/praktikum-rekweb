@@ -55,7 +55,8 @@
                         <td>
                             <a href="<?= base_url(); ?>peoples/detailPeoples/<?= $people['id']; ?>"
                                 class="badge badge-warning">Detail</a>
-                            <a href="" class="badge badge-succes">edit</a>
+                            <a href="<?= base_url(); ?>peoples/ubah/<?= $people['id']; ?>"
+                                class="badge badge-succes">edit</a>
                             <a href="<?= base_url(); ?>peoples/hapus/<?= $people['id']; ?>" class="badge badge-danger"
                                 onclick="return confirm('Apakah Yakin ?')">Hapus</a>
                         </td>

@@ -54,4 +54,23 @@ class Peoples extends CI_Controller
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('peoples');
     }
+
+    public function ubah($id)
+    {
+        $data['judul'] = 'Form ubah Data Peoples';
+        $data['peoples'] = $this->peoples->getPeoplesById($id);
+
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('address', 'Address', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('peoples/ubah_peoples', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->peoples->ubahDataPeoples();
+            $this->session->set_flashdata('flash', 'Diubah');
+            redirect('peoples');
+        }
+    }
 }
